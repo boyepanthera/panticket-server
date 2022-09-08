@@ -4,10 +4,10 @@ import { v4 as uuidv4 } from 'uuid';
 const categorySchema = new Schema({
   _id: {
     type: String,
-    default: uuidv4(),
+    default: uuidv4,
   },
   name: {
-    type: Number,
+    type: String,
     required: true,
   },
 });

@@ -3,16 +3,11 @@ import Joi from 'joi';
 const eventSchema = Joi.object({
   name: Joi.string().min(2).max(50).required(),
   location: Joi.string().min(2).max(50).required(),
-  price: Joi.number().required(),
   date: Joi.string().required(),
+  time: Joi.string().required(),
   isFeatured: Joi.boolean(),
   description: Joi.string().required(),
-  ticketTypes: Joi.array().items(
-    Joi.object({
-      name: Joi.string().required(),
-      price: Joi.number().required(),
-    })
-  ),
+  ticketTypes: Joi.array().items(Joi.string()),
   organizer: Joi.string().required(),
   category: Joi.string().required(),
 });

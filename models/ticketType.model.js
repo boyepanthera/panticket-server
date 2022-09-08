@@ -4,15 +4,15 @@ import { v4 as uuidv4 } from 'uuid';
 const ticketTypeSchema = new Schema({
   _id: {
     type: String,
-    default: uuidv4(),
-  },
-  price: {
-    type: Number,
-    default: 0,
+    default: uuidv4,
   },
   name: {
     type: String,
     required: true,
+  },
+  price: {
+    type: Number,
+    default: 0,
   },
   event: {
     type: String,

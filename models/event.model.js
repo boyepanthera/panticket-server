@@ -4,18 +4,17 @@ import { v4 as uuidv4 } from 'uuid';
 const eventSchema = new Schema({
   _id: {
     type: String,
-    default: uuidv4(),
+    default: uuidv4,
   },
   name: {
     type: String,
     required: true,
   },
-  location: {
+  time: {
     type: String,
   },
-  price: {
-    type: Number,
-    default: 0,
+  location: {
+    type: String,
   },
   date: {
     type: Date,
