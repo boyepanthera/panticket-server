@@ -9,11 +9,29 @@ import {
   updateEvent,
   fetchEventById,
 } from './controllers/event.controller';
-import { createCategory } from './controllers/category.controller';
+import {
+  createCategory,
+  deleteCategory,
+  fetchCategories,
+  fetchCategoryById,
+  updateCategory,
+} from './controllers/category.controller';
 import { validateEventData } from './controllers/middleware/event.validator';
-import { validateOrganizerData } from './controllers/middleware/organizer.validator';
-import { createOrganizer } from './controllers/organizer.controller';
-import { validateCategoryData } from './controllers/middleware/category.validator';
+import {
+  validateOrganizerData,
+  validateOrganizerUpdateData,
+} from './controllers/middleware/organizer.validator';
+import {
+  createOrganizer,
+  deleteOrganizer,
+  fetchOrganizerById,
+  fetchOrganizers,
+  updateOrganizer,
+} from './controllers/organizer.controller';
+import {
+  validateCategoryData,
+  validateCategoryUpdateData,
+} from './controllers/middleware/category.validator';
 import {
   validateTicketTypeData,
   validateTicketTypeUpdateData,
@@ -25,6 +43,7 @@ import {
   fetchTicketTypeById,
   updateTicketType,
 } from './controllers/tickettype.controller';
+import { validate } from 'uuid';
 dotenv.config();
 
 const connectToDB = () => mongoose.connect(process.env.DEV_DB);
@@ -54,7 +73,11 @@ server.put('/event/:id', updateEvent);
 server.delete('/event/:id', deleteEvent);
 
 //category routes
+server.get('/category', fetchCategories);
 server.post('/category', validateCategoryData, createCategory);
+server.get('/category/:id', fetchCategoryById);
+server.put('/category/:id', validateCategoryUpdateData, updateCategory);
+server.delete('/category/:id', deleteCategory);
 
 //tickettypes routes
 server.get('/tickettype', fetchTicketType);
@@ -64,7 +87,11 @@ server.put('/tickettype/:id', validateTicketTypeUpdateData, updateTicketType);
 server.delete('/tickettype/:id', deleteTicketType);
 
 //organizer routes
+server.get('/organizer', fetchOrganizers);
 server.post('/organizer', validateOrganizerData, createOrganizer);
+server.get('/organizer/:id', fetchOrganizerById);
+server.put('/organizer/:id', validateOrganizerUpdateData, updateOrganizer);
+server.delete('/organizer/:id', deleteOrganizer);
 
 server.listen(port, () => {
   console.log('server started and running on port ' + port);
