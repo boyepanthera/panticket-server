@@ -1,13 +1,26 @@
+import cloudinary from 'cloudinary';
 import Event from '../models/event.model';
+import dotenv from 'dotenv';
+dotenv.config();
+
+cloudinary.config({
+  cloud_name: process.env.CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+  // secure: true,
+});
 
 export async function createEvent(req, res) {
   try {
+    let uploadedImage = await cloudinary.v2.uploader.upload(req.file.path);
+    req.body.image = uploadedImage.secure_url;
     const newEvent = await Event.create(req.body);
     return res.status(201).json({
       message: 'event created successfully',
       event: newEvent,
     });
   } catch (err) {
+    console.log(err);
     return res.status(500).json({
       message: 'Issues processing your request',
     });

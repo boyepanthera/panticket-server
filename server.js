@@ -2,6 +2,7 @@ import express from 'express';
 import { homeController } from './controllers/home.controller';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
+import multer from 'multer';
 import {
   createEvent,
   fetchEvents,
@@ -43,8 +44,14 @@ import {
   fetchTicketTypeById,
   updateTicketType,
 } from './controllers/tickettype.controller';
-import { validate } from 'uuid';
 dotenv.config();
+
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, '/tmp/');
+  },
+});
+const upload = multer({ storage: storage });
 
 const connectToDB = () => mongoose.connect(process.env.DEV_DB);
 
@@ -71,7 +78,7 @@ server.get('/', homeController);
 
 // events routes
 server.get('/event', fetchEvents);
-server.post('/event', validateEventData, createEvent);
+server.post('/event', upload.single('image'), validateEventData, createEvent);
 server.get('/event/:id', fetchEventById);
 server.put('/event/:id', updateEvent);
 server.delete('/event/:id', deleteEvent);
