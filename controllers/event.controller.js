@@ -7,11 +7,11 @@ cloudinary.config({
   cloud_name: process.env.CLOUD_NAME,
   api_key: process.env.CLOUDINARY_API_KEY,
   api_secret: process.env.CLOUDINARY_API_SECRET,
-  // secure: true,
 });
 
 export async function createEvent(req, res) {
   try {
+    console.log(req.file);
     let uploadedImage = await cloudinary.v2.uploader.upload(req.file.path);
     req.body.image = uploadedImage.secure_url;
     const newEvent = await Event.create(req.body);

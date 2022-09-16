@@ -8,7 +8,6 @@ export async function createTicketType(req, res) {
       event: newTicketType,
     });
   } catch (err) {
-    console.error(err);
     return res.status(500).json({
       message: 'Issues processing your request',
     });

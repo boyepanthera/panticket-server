@@ -3,6 +3,7 @@ import { homeController } from './controllers/home.controller';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import multer from 'multer';
+import { v4 as uuid } from 'uuid';
 import {
   createEvent,
   fetchEvents,
@@ -47,11 +48,10 @@ import {
 dotenv.config();
 
 const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, '/tmp/');
+  filename: function (req, file, callback) {
+    return callback(null, uuid() + '-' + file.originalname);
   },
 });
-const upload = multer({ storage: storage });
 
 const connectToDB = () => mongoose.connect(process.env.DEV_DB);
 
@@ -67,6 +67,8 @@ server.use(
     extended: true,
   })
 );
+
+const upload = multer({ storage: storage });
 
 let port = 4001;
 
