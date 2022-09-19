@@ -69,8 +69,8 @@ server.use(
   })
 );
 
-app.options('*', cors());
-app.use(cors());
+server.options('*', cors());
+server.use(cors());
 
 const upload = multer({ storage: storage });
 
