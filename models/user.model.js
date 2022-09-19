@@ -6,12 +6,10 @@ const userSchema = new Schema({
     type: String,
     default: uuidv4,
   },
-
   name: {
-    type: Number,
+    type: String,
     required: true,
   },
-
   phone: String,
   email: String,
 });

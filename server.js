@@ -46,6 +46,12 @@ import {
   fetchTicketTypeById,
   updateTicketType,
 } from './controllers/tickettype.controller';
+import { validateTicketData } from './controllers/middleware/ticket.validator';
+import {
+  createTicket,
+  getTicketById,
+  updateTicketById,
+} from './controllers/ticket.controller';
 dotenv.config();
 
 const storage = multer.diskStorage({
@@ -74,7 +80,7 @@ server.use(cors());
 
 const upload = multer({ storage: storage });
 
-let port = 4001;
+let port = 4002;
 
 if (process.env.NODE_ENV !== 'development') {
   port = process.env.PORT;
@@ -109,6 +115,11 @@ server.post('/organizer', validateOrganizerData, createOrganizer);
 server.get('/organizer/:id', fetchOrganizerById);
 server.put('/organizer/:id', validateOrganizerUpdateData, updateOrganizer);
 server.delete('/organizer/:id', deleteOrganizer);
+
+//ticket routes
+server.post('/ticket', validateTicketData, createTicket);
+server.get('/ticket/:id', getTicketById);
+server.patch('/ticket/:id', updateTicketById);
 
 server.listen(port, () => {
   console.log('server started and running on port ' + port);

@@ -8,17 +8,10 @@ const ticketSchema = new Schema({
   },
   issuer: String,
   vendor: String,
-  price: {
-    type: Number,
-    default: 0,
-  },
   status: {
     String,
   },
   issuedDate: { Date },
-  email: {
-    type: String,
-  },
   event: {
     type: String,
     ref: 'Event',
