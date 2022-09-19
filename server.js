@@ -3,6 +3,7 @@ import { homeController } from './controllers/home.controller';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import multer from 'multer';
+import cors from 'cors';
 import { v4 as uuid } from 'uuid';
 import {
   createEvent,
@@ -67,6 +68,9 @@ server.use(
     extended: true,
   })
 );
+
+app.options('*', cors());
+app.use(cors());
 
 const upload = multer({ storage: storage });
 
