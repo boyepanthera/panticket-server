@@ -3,6 +3,7 @@ module.exports = {
     {
       name: 'panticket',
       script: './server.js',
+      'node-args': '-r esm',
       watch: true,
       env: {
         NODE_ENV: 'development',
