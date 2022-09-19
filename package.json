@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon -r esm server.js",
-    "start": "pm2  start server.js --node-args='-r esm'"
+    "start": "pm2-runtime start ecosystem.config.js --env production --node-args='-r esm'"
   },
   "keywords": [
     "booking",
