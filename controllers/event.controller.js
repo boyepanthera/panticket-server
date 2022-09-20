@@ -74,7 +74,7 @@ export function fetchEvents(req, res) {
         events,
       });
     }
-  });
+  }).populate('ticketTypes');
 }
 export function fetchEventById(req, res) {
   Event.findById(req.params.id, function (err, event) {
