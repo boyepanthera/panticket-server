@@ -89,5 +89,5 @@ export function fetchEventById(req, res) {
         event,
       });
     }
-  });
+  }).populate(['organizer', 'ticketTypes', 'category']);
 }
